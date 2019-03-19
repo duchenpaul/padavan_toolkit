@@ -11,6 +11,8 @@ except ImportError:
 import base64
 
 
+# proxies = { "http": "http://127.0.0.1:8888", }
+
 class Padavan():
     """docstring for Padavan"""
 
@@ -23,9 +25,7 @@ class Padavan():
         self.sess = requests.Session()
         self.headers = {
             'Host': self.host,
-            'Proxy-Connection': 'keep-alive',
-            'Pragma': 'no-cache',
-            'Cache-Control': 'no-cache',
+            'Connection': 'keep-alive',
             'Authorization': 'Basic {}'.format(self.authorization),
             'Upgrade-Insecure-Requests': '1',
             'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Mobile Safari/537.36',
@@ -38,8 +38,9 @@ class Padavan():
         if headers is None:
             headers = dict()
         # print("Get: " + url)
+        proxies = None
         self.resp = self.sess.get(
-            url, headers=headers, allow_redirects=allow_redirects, verify=False)
+            url, headers=headers, allow_redirects=allow_redirects, verify=False, proxies=proxies)
         # print(self.resp.content.decode('utf-8').replace('\r\n', '\n'))
         return self.resp
 
@@ -63,7 +64,7 @@ class Padavan():
         logging.info('Request url: {}'.format(api_url))
         print('Request url: {}'.format(api_url))
         self.resp = self.webpage_get(
-            self.url, headers=self.headers, allow_redirects=True)
+            api_url, headers=self.headers, allow_redirects=True)
         return self.resp.text
 
 
