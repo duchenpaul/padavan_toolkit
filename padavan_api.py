@@ -1,4 +1,6 @@
 '''A template for sending requests to websites'''
+import logging
+
 import requests
 import urllib.parse
 try:
@@ -61,9 +63,10 @@ class Padavan():
             Take in api string, e.g: update.cgi?output=netdev
         '''
         api_url = self.url + api_string
+        logging.info('Request url: {}'.format(api_url))
         self.resp = self.webpage_get(
             self.url, headers=self.headers, allow_redirects=True)
-        return self.resp.content
+        return self.resp.text
 
 
 if __name__ == '__main__':
