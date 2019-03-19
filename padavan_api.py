@@ -48,9 +48,6 @@ class Padavan():
             headers = dict()
         self.resp = self.sess.post(
             url, data=data, headers=headers, verify=False)
-        # self.req = requests.Request('POST', url, data=data, headers=headers)
-        # self.prepped = self.sess.prepare_request(self.req)
-        # self.resp = self.sess.send(self.prepped)
         return self.resp
 
     def save_page(self, page):
@@ -64,6 +61,7 @@ class Padavan():
         '''
         api_url = self.url + api_string
         logging.info('Request url: {}'.format(api_url))
+        print('Request url: {}'.format(api_url))
         self.resp = self.webpage_get(
             self.url, headers=self.headers, allow_redirects=True)
         return self.resp.text
