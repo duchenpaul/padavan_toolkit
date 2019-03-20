@@ -11,7 +11,7 @@ except ImportError:
 import base64
 
 
-# proxies = { "http": "http://127.0.0.1:8888", }
+proxies = { "http": "socks5://127.0.0.1:1083", }
 
 class Padavan():
     """docstring for Padavan"""
@@ -38,7 +38,7 @@ class Padavan():
         if headers is None:
             headers = dict()
         # print("Get: " + url)
-        proxies = None
+        # proxies = None
         self.resp = self.sess.get(
             url, headers=headers, allow_redirects=allow_redirects, verify=False, proxies=proxies)
         # print(self.resp.content.decode('utf-8').replace('\r\n', '\n'))
